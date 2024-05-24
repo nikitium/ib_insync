@@ -1211,7 +1211,8 @@ class Wrapper:
                 ticker.domAsks.clear()
                 ticker.domBids.clear()
                 self.pendingTickers.add(ticker)
-        elif errorCode == 10225:
+        elif (errorCode == 10225) or (errorCode == 10182):
+            # !Patch! Erro code 10182 is not listed in the official documentation, however, if in TWS click Data -> Reconnect to All Farms, then we will get this code
             # Bust event occurred, current subscription is deactivated.
             # Please resubscribe real-time bars immediately
             bars = self.reqId2Subscriber.get(reqId)
